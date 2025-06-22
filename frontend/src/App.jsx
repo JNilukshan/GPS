@@ -13,7 +13,7 @@ import Verify from "./pages/Verify";
 import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { ToastProvider } from "./components/ToastProvider";
-import EmailForm from "./pages/Example"; //
+import EmailForm from "./pages/example"; //Could not resolve "./pages/Example" from "src/App.jsx"
 
 const App = () => {
     return (
