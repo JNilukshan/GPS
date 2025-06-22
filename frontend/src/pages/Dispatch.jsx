@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { createStatus, getPendingStatuses, getApprovedStatuses, getRejectedStatuses, approveStatus, rejectStatus, searchUserByServiceNo } from '../services/dispatchService';
-import { getImageUrl, searchReceiverByServiceNo } from '../services/requestService';
+import { getImageUrl, searchReceiverByServiceNo } from '../services/RequestService';
 import { jsPDF } from "jspdf";
 import { useToast } from '../components/ToastProvider';
 import logoUrl from '../assets/SLTMobitel_Logo.png';

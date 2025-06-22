@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { FaUserPlus, FaEdit, FaTrash, FaSearch, FaFilter, FaEye, FaEyeSlash, FaUserShield, FaUser, FaMapMarkerAlt } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { userManagementService } from '../services/userManagementService';
-import { getLocations } from '../services/requestService';
+import { getLocations } from '../services/RequestService';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 

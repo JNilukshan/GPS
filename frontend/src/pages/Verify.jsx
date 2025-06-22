@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { createStatus, getPendingStatuses, getApprovedStatuses, getRejectedStatuses, approveStatus, rejectStatus, searchUserByServiceNo } from '../services/verifyService';
 import { getUserByRoleAndBranch } from '../services/userManagementService';
-import { getImageUrl, searchReceiverByServiceNo } from '../services/requestService';
+import { getImageUrl, searchReceiverByServiceNo } from '../services/RequestService';
 import { useToast } from '../components/ToastProvider';
 import { emailSent } from '../services/emailService';
 import { jsPDF } from "jspdf";
