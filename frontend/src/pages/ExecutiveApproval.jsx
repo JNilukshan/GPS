@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import {createStatus, getPendingStatuses, getApprovedStatuses, getRejectedStatuses, approveStatus, rejectStatus, searchUserByServiceNo} from '../services/approveService'; //Approve to approve
-import { getImageUrl, searchReceiverByServiceNo, getGatePassRequest } from '../services/requestService';
+import { getImageUrl, searchReceiverByServiceNo, getGatePassRequest } from '../services/RequestService';
 import { useToast } from '../components/ToastProvider';
 import { emailSent } from '../services/emailService';
 import { FaSearch } from 'react-icons/fa';
