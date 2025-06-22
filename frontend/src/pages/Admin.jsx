@@ -4,7 +4,7 @@ import { FaPlus, FaUpload, FaMapMarkerAlt, FaTag, FaFileUpload, FaChartBar, FaUs
 import UserManagement from './UserManagement';
 
 const AdminDashboard = () => {
-  const [activeTab, setActiveTab] = useState('manage');
+  const [activeTab, setActiveTab] = useState('manage');//
   const [location, setLocation] = useState('');
   const [category, setCategory] = useState('');
   const [locationFile, setLocationFile] = useState(null);
