@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import {createStatus, getPendingStatuses, getApprovedStatuses, getRejectedStatuses, approveStatus, rejectStatus, searchUserByServiceNo} from '../services/ApproveService'; //approve to Approve
+import {createStatus, getPendingStatuses, getApprovedStatuses, getRejectedStatuses, approveStatus, rejectStatus, searchUserByServiceNo} from '../services/ApproveService'; //ApproveService
 import { getImageUrl, searchReceiverByServiceNo, getGatePassRequest } from '../services/RequestService';
 import { useToast } from '../components/ToastProvider';
 import { emailSent } from '../services/emailService';
