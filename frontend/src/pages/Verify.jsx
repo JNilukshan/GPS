@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { createStatus, getPendingStatuses, getApprovedStatuses, getRejectedStatuses, approveStatus, rejectStatus, searchUserByServiceNo } from '../services/verifyService';
+import { createStatus, getPendingStatuses, getApprovedStatuses, getRejectedStatuses, approveStatus, rejectStatus, searchUserByServiceNo } from '../services/VerifyService';
 import { getUserByRoleAndBranch } from '../services/userManagementService';
 import { getImageUrl, searchReceiverByServiceNo } from '../services/RequestService';
 import { useToast } from '../components/ToastProvider';
