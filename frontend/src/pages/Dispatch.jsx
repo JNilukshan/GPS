@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { createStatus, getPendingStatuses, getApprovedStatuses, getRejectedStatuses, approveStatus, rejectStatus, searchUserByServiceNo } from '../services/dispatchService';
+import { createStatus, getPendingStatuses, getApprovedStatuses, getRejectedStatuses, approveStatus, rejectStatus, searchUserByServiceNo } from '../services/DispatchService';
 import { getImageUrl, searchReceiverByServiceNo } from '../services/RequestService';
 import { jsPDF } from "jspdf";
 import { useToast } from '../components/ToastProvider';
