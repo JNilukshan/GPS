@@ -5,27 +5,25 @@
     app_path: /home/azureuser/gps
 
   tasks:
-    - name: Update APT packages
-      apt:
-        update_cache: yes
+    - name: Ensure Docker is available
+      command: docker --version
+      register: docker_version
+      ignore_errors: true
 
-    - name: Install Docker
-      apt:
-        name: docker.io
-        state: present
+    - name: Fail if Docker is not installed
+      fail:
+        msg: "Docker is not installed on the VM. Please install it before running this playbook."
+      when: docker_version.rc != 0
 
-    - name: Install Docker Compose
-      get_url:
-        url: https://github.com/docker/compose/releases/download/v2.22.0/docker-compose-linux-x86_64
-        dest: /usr/local/bin/docker-compose
-        mode: '0755'
+    - name: Ensure Docker Compose is available
+      command: docker-compose --version
+      register: compose_version
+      ignore_errors: true
 
-    - name: Create symlink for docker-compose
-      file:
-        src: /usr/local/bin/docker-compose
-        dest: /usr/bin/docker-compose
-        state: link
-        force: yes
+    - name: Fail if Docker Compose is not installed
+      fail:
+        msg: "Docker Compose is not installed on the VM. Please install it before running this playbook."
+      when: compose_version.rc != 0
 
     - name: Add azureuser to docker group
       user:
@@ -38,6 +36,7 @@
         repo: https://github.com/JNilukshan/GPS.git
         dest: "{{ app_path }}"
         version: main
+        force: yes
 
     - name: Create backend .env from variables
       copy:
@@ -57,7 +56,9 @@
         content: |
           VITE_API_URL={{ lookup('env', 'VITE_API_URL') }}
 
-    - name: Start Docker containers
-      shell: docker-compose up -d
+    - name: Start Docker containers (disable BuildKit)
+      shell: |
+        export DOCKER_BUILDKIT=0
+        docker-compose up -d --build
       args:
         chdir: "{{ app_path }}"
