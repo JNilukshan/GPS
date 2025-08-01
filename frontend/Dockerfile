@@ -1,4 +1,5 @@
-FROM node:18
+# frontend/Dockerfile
+FROM node:18-alpine
 
 WORKDIR /app
 
@@ -9,6 +10,9 @@ COPY . .
 
 RUN npm run build
 
+# Use `serve` to host production build
+RUN npm install -g serve
+
 EXPOSE 3000
 
-CMD ["npx", "serve", "dist"]
+CMD ["serve", "-s", "dist", "-l", "3000"]
