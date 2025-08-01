@@ -1,0 +1,63 @@
+- name: Setup Dockerized React + Node.js App
+  hosts: web
+  become: true
+  vars:
+    app_path: /home/azureuser/gps
+
+  tasks:
+    - name: Update APT packages
+      apt:
+        update_cache: yes
+
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Install Docker Compose
+      get_url:
+        url: https://github.com/docker/compose/releases/download/v2.22.0/docker-compose-linux-x86_64
+        dest: /usr/local/bin/docker-compose
+        mode: '0755'
+
+    - name: Create symlink for docker-compose
+      file:
+        src: /usr/local/bin/docker-compose
+        dest: /usr/bin/docker-compose
+        state: link
+        force: yes
+
+    - name: Add azureuser to docker group
+      user:
+        name: azureuser
+        groups: docker
+        append: yes
+
+    - name: Clone the GitHub Repo
+      git:
+        repo: https://github.com/JNilukshan/GPS.git
+        dest: "{{ app_path }}"
+        version: main
+
+    - name: Create backend .env from variables
+      copy:
+        dest: "{{ app_path }}/backend/.env"
+        content: |
+          MONGO_URI={{ lookup('env', 'MONGO_URI') }}
+          JWT_SECRET={{ lookup('env', 'JWT_SECRET') }}
+          SUPABASE_URL={{ lookup('env', 'SUPABASE_URL') }}
+          SUPABASE_KEY={{ lookup('env', 'SUPABASE_KEY') }}
+          PORT=5000
+          EMAIL_USER={{ lookup('env', 'EMAIL_USER') }}
+          EMAIL_PASS={{ lookup('env', 'EMAIL_PASS') }}
+
+    - name: Create frontend .env from variables
+      copy:
+        dest: "{{ app_path }}/frontend/.env"
+        content: |
+          VITE_API_URL={{ lookup('env', 'VITE_API_URL') }}
+
+    - name: Start Docker containers
+      shell: docker-compose up -d
+      args:
+        chdir: "{{ app_path }}"
